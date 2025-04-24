@@ -1,0 +1,55 @@
+<div class="center">
+
+    @if(!targetWord()) {
+        <!-- Game hasn't started yet -->
+        @if (isLoading()) {
+            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+        } 
+        @else {
+        <p-button size="large" icon="pi pi-plus" label="Start Game" (click)="generateTargetWord()"></p-button>
+        }
+    }
+    
+    @else {
+        <!-- Game has started -->
+
+        <!-- ...existing code... -->
+        <div class="guesses">
+            <ng-container *ngFor="let idx of [].constructor(maxGuesses()); let i = index">
+                <app-lingo-guess
+                    [guess]="
+                        i < splitGuesses().length
+                            ? splitGuesses()[i]
+                            : (!isGameOver() && i === splitGuesses().length
+                                ? splitCurrentGuess()
+                                : [])"
+                    [isCurrent]="!isGameOver() && i === splitGuesses().length"
+                    [target]="splitTargetWord()">
+                </app-lingo-guess>
+            </ng-container>
+        </div>
+
+        @if(isLoading()) {
+            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+        }
+
+        <app-lingo-keyboard
+            [correctlyGuessedLetters]="correctlyGuessedLetters()"
+            [wrongPlaceLetters]="wrongPlaceLetters()"
+            [incorrectLetters]="incorrectLetters()"
+            (onKeyPress)="captureInput($event)"
+            (onBackspace)="backspace()"
+            (onEnter)="submitGuess()">
+        </app-lingo-keyboard>
+
+        @if(isGameOver() || isGameWon()) {
+            <div>{{ isGameWon() ? 'Well done!' : 'Game Over!' }}</div>
+            <div>The word was: {{ targetWord() }}</div>
+            <app-lingo-options />
+            <p-button size="large" icon="pi pi-plus" label="New Game" (click)="generateTargetWord()"></p-button>
+        }
+
+        <p-toast />
+
+    }
+</div>

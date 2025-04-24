@@ -1,0 +1,16 @@
+.tile {
+    width: 2em;
+    height: 2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #888;
+    margin: 0 0.1em;
+    font-size: 1.5em;
+    background: #222;
+    color: #fff;
+  }
+  .tile-correct { background: #4caf50; }
+  .tile-present { background: #ffd600; color: #222; }
+  .tile-absent { background: #444; }
+  .tile-uncolored { background: #222; }

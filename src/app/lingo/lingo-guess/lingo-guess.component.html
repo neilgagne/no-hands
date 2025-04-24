@@ -1,0 +1,14 @@
+<div class="guess-row">
+    <div
+      *ngFor="let tile of tiles"
+      class="tile"
+      [ngClass]="{
+        'tile-correct': tile.state === 'correct',
+        'tile-present': tile.state === 'present',
+        'tile-absent': tile.state === 'absent',
+        'tile-uncolored': tile.state === 'uncolored'
+      }"
+    >
+      {{ tile.letter }}
+    </div>
+  </div>

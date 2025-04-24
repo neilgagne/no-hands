@@ -1,0 +1,25 @@
+<div class="keyboard flex flex-column gap-2">
+  <ng-container *ngFor="let row of KEYS; let rowIndex = index">
+    <div class="keyboard-row flex justify-content-center gap-2">
+      <ng-container *ngIf="rowIndex === KEYS.length - 1">
+        <p-button size="large" label="ENTER" (onClick)="handleEnter()" class="h-3rem"></p-button>
+      </ng-container>
+      <ng-container *ngFor="let key of row">
+        <p-button
+          size="large"
+          [label]="key | uppercase"
+          (onClick)="handleKeyPress(key)"
+          [severity]="
+            correctlyGuessedLetters.includes(key) ? 'success' :
+            wrongPlaceLetters.includes(key) ? 'warn' :
+            incorrectLetters.includes(key) ? 'secondary' : undefined
+          "
+          class="lingo-key h-3rem"
+        ></p-button>
+      </ng-container>
+      <ng-container *ngIf="rowIndex === KEYS.length - 1">
+        <p-button size="large" icon="pi pi-delete-left" (onClick)="handleBackspace()" class="h-3rem"></p-button>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
