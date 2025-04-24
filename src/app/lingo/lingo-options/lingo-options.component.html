@@ -1,0 +1,44 @@
+<p-button size="large" (click)="op.toggle($event)" icon="pi pi-cog" label="Options" />
+<p-popover #op>
+    <div class="flex-col gap-4 w-[25rem]">
+        <div>
+            Difficulty
+            <p-select 
+                id="difficulty"
+                class="w-[25rem]" 
+                optionValue="value"
+                optionLabel="label"
+                [options]="DIFFICULTY_OPTIONS" 
+                [ngModel]="difficulty()"
+                (onChange)="onDifficultyChange($event)"
+            />
+        </div>
+        <div>
+            Max Guesses
+            <p-select 
+                id="maxGuesses"
+                class="w-[25rem]" 
+                optionValue="value"
+                optionLabel="label"
+                [options]="MAX_GUESSES_OPTIONS" 
+                [ngModel]="maxGuesses()"
+                (onChange)="onMaxGuessesChange($event)"
+            />
+        </div>
+        <div>
+            Word Length
+            <p-select 
+                id="wordLength"
+                class="w-[25rem]" 
+                optionValue="value"
+                optionLabel="label"
+                [options]="WORD_LENGTH_OPTIONS" 
+                [ngModel]="wordLength()"
+                (onChange)="onWordLengthChange($event)"
+            />
+        </div>
+        <div>difficulty {{ difficulty() }}</div>
+        <div>maxGuesses {{ maxGuesses() }}</div>
+        <div>wordLength {{ wordLength() }}</div>
+    </div>
+</p-popover>
